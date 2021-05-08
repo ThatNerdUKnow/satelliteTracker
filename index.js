@@ -15,7 +15,6 @@ async function trackSats()
 
         try
         {
-        console.log(sat)
         satRec = satellite.twoline2satrec(sat[1],sat[2]);
 
         satRecs.push({"name": sat[0],satRec})
@@ -29,9 +28,18 @@ async function trackSats()
     })
 
     satRecs.forEach(rec=>{
-        var posVel = satellite.propagate(rec.satRec,new Date())
-        rec.posVel = posVel
+        const currentTime = new Date()
+        const gsTime = satellite.gstime(currentTime)
+        var posVel = satellite.propagate(rec.satRec,currentTime)
+       
+        rec.position =satellite.eciToGeodetic(posVel.position,gsTime)
+        rec.velocity = posVel.velocity
+
+        console.log(rec.position)
+        
+        
     })
+
 
     return satRecs;
 }
