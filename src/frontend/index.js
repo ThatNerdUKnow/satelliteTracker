@@ -3,6 +3,7 @@ const {viewer} = require('./globe.js')
 import * as Cesium from 'cesium';
 const satellite = require('satellite.js')
 
+viewer.clock.shouldAnimate = true
 
 trackSats().then(sats=>{
     console.log(sats)
@@ -12,8 +13,12 @@ trackSats().then(sats=>{
         globeSetup(sat)
     })
 
-    
-    
+    setInterval(()=>{
+        var clockDate = Cesium.JulianDate.toDate(viewer.clock.currentTime)
+        sats.forEach(sat=>{
+            sat.pointEntity.position = getCoords(sat,clockDate)
+        })
+    },1000/60)
 
 }).catch(err=>{
     console.log("couldn't get sat data")
@@ -23,22 +28,36 @@ trackSats().then(sats=>{
 
 
 function globeSetup(sat){
-    const date = new Date();
+    
+    const date = Cesium.JulianDate.toDate(viewer.clock.currentTime)
+
+    var cartesianPosition = getCoords(sat,date);
+
+    
+
+   
+
+    sat.pointEntity = viewer.entities.add({
+        description: sat.name,
+        position: cartesianPosition,
+        point: {pixelSize: 5,color: Cesium.Color.RED},
+       
+    })
+
+
+}
+
+function getCoords(sat,date)
+{
     var gsTime = satellite.gstime(date)
-    var positionAndVelocity = satellite.propagate(sat.satRec,new Date())
+    var positionAndVelocity = satellite.propagate(sat.satRec,date)
 
     var position = satellite.eciToGeodetic(positionAndVelocity.position,gsTime)
     
     position.latitude = satellite.degreesLat(position.latitude);
     position.longitude = satellite.degreesLong(position.longitude)
     position.height *= 1000
-    
 
-    const pointEntity = viewer.entities.add({
-        description: sat.name,
-        position: Cesium.Cartesian3.fromDegrees(position.longitude,position.latitude,position.height),
-        point: {pixelSize: 5,color: Cesium.Color.RED}
-    })
-
-    
+    var cartesian = new Cesium.Cartesian3.fromDegrees(position.longitude,position.latitude,position.height)
+    return cartesian
 }
