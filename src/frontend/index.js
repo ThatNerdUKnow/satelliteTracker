@@ -20,6 +20,8 @@ trackSats().then(sats=>{
     console.log(err)
 });
 
+
+
 function globeSetup(sat){
     const date = new Date();
     var gsTime = satellite.gstime(date)

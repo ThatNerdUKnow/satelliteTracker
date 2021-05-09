@@ -19,9 +19,10 @@ app.use(express.static('../../dist',options))
 app.get('/satdata',async (req,res)=>{
     
     satData = await axios.get("https://www.celestrak.com/NORAD/elements/active.txt");
-    console.log(satData)
     res.send(satData.data)
 })
+
+
 
 
 app.listen(80)

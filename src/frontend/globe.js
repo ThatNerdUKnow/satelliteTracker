@@ -10,5 +10,5 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
   terrainProvider: Cesium.createWorldTerrain()
 });    
 
-console.log(viewer)
+
 export {viewer}
