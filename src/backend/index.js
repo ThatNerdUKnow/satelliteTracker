@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const axios = require('axios');
 
@@ -25,5 +26,5 @@ app.get('/satdata',async (req,res)=>{
 
 
 
-app.listen(80)
-console.log("Now listening on port 80")
+app.listen(process.env.PORT || 80)
+console.log("Now listening")
