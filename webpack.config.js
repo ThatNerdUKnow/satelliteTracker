@@ -1,10 +1,27 @@
+const CopyPlugin = require("copy-webpack-plugin")
 const path = require('path')
+
+const cesiumDir = "node_modules/cesium/Build/Cesium"
 module.exports = {
-  entry: './index.js',
-  mode: 'development',
-  devtool: 'eval',
-  output:{
-    path: path.resolve(__dirname,'dist'),
-    filename: 'bundle.js'
-  }
-};
+    mode: 'development',
+    entry: './index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
+    },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: `${cesiumDir}/Assets`, to: "./Assets" },
+                {
+                    from: `${cesiumDir}/ThirdParty`, to: './ThirdParty'
+                },
+                { from: `${cesiumDir}/Workers`, to: './Workers' },
+                {from: `${cesiumDir}/Widgets`,to: './Widgets'},
+                {from: "./index.html",to: './'}
+
+            ]
+        })
+    ]
+
+}
