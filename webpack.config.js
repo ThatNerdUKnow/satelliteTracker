@@ -4,7 +4,7 @@ const path = require('path')
 const cesiumDir = "node_modules/cesium/Build/Cesium"
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/frontend/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -17,8 +17,8 @@ module.exports = {
                     from: `${cesiumDir}/ThirdParty`, to: './ThirdParty'
                 },
                 { from: `${cesiumDir}/Workers`, to: './Workers' },
-                {from: `${cesiumDir}/Widgets`,to: './Widgets'},
-                {from: "./src/index.html",to: './'}
+                { from: `${cesiumDir}/Widgets`, to: './Widgets' },
+                { from: "./src/frontend/index.html", to: './' }
 
             ]
         })

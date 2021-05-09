@@ -4,7 +4,7 @@ const satellite = require('satellite.js')
 
 async function trackSats()
 {
-    var satData = await axios.get("https://www.celestrak.com/NORAD/elements/stations.txt");
+    var satData = await axios.get("./satdata");
     satData = satData.data.split("\r\n")
     
     satData = chunk(satData,3)
