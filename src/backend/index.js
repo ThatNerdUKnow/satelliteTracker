@@ -14,7 +14,7 @@ const options = {
   }
 
 // Serve static files
-app.use(express.static('../../dist',options))
+app.use(express.static('./dist',options))
 
 app.get('/satdata',async (req,res)=>{
     
@@ -26,3 +26,4 @@ app.get('/satdata',async (req,res)=>{
 
 
 app.listen(80)
+console.log("Now listening on port 80")
