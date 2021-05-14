@@ -3,7 +3,7 @@ const path = require('path')
 
 const cesiumDir = "node_modules/cesium/Build/Cesium"
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: './src/frontend/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
