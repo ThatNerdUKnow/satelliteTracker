@@ -40,7 +40,7 @@ function globeSetup(sat){
     sat.pointEntity = viewer.entities.add({
         description: sat.name,
         position: cartesianPosition,
-        point: {pixelSize: 5,color: Cesium.Color.RED},
+        point: {pixelSize: 3,color: Cesium.Color.fromRandom()},
        
     })
 
