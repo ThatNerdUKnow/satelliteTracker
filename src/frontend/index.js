@@ -2,11 +2,12 @@ const trackSats = require('./trackSats')
 const {viewer} = require('./globe.js')
 import * as Cesium from 'cesium';
 const satellite = require('satellite.js')
-
 viewer.clock.shouldAnimate = true
 
+console.log("View the source code: https://github.com/Withenex/satelliteTracker")
+
 trackSats().then(sats=>{
-    console.log(sats)
+    
 
     
     sats.forEach(sat=>{
