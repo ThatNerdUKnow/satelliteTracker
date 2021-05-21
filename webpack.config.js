@@ -18,7 +18,8 @@ module.exports = {
                 },
                 { from: `${cesiumDir}/Workers`, to: './Workers' },
                 { from: `${cesiumDir}/Widgets`, to: './Widgets' },
-                { from: "./src/frontend/index.html", to: './' }
+                { from: "./src/frontend/index.html", to: './' },
+                {from: "./src/frontend/favicon.ico", to: './'}
 
             ]
         })
