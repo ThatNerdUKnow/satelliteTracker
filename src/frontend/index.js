@@ -19,7 +19,7 @@ trackSats().then(sats=>{
         sats.forEach(sat=>{
             sat.pointEntity.position = getCoords(sat,clockDate)
         })
-    },1000/60)
+    },1000/30)
 
 }).catch(err=>{
     console.log("couldn't get sat data")
